@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#05070c"><meta name="description" content="FluxTrade Tier-1 BTC intraday quantitative research terminal">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070c">
+<meta name="description" content="FluxTrade Tier-1 BTC intraday quantitative research terminal">
 <title>FluxTrade — BTC Tier-1 Quant Terminal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://unpkg.com/lightweight-charts@5.2.0/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
 <div class="shell">
@@ -26,7 +29,7 @@
  <div class="sidebox"><h4>Data Integrity</h4><div class="mini"><span>Source</span><b>Binance public</b></div><div class="mini"><span>Feed</span><b>WS + REST</b></div><div class="mini"><span>Mode</span><b>Paper only</b></div><div class="mini"><span>Latency</span><b>browser-side</b></div></div>
 </aside>
 <section class="center">
- <div class="chart-area"><div class="chart-header"><b id="viewTitle">OVERVIEW</b><span class="grow"></span><label class="sub">Timeframe</label><select id="tf" class="tab" style="background:#0a0f18;color:#e8eef7;border:1px solid #1a2230"><option value="1m">1m</option><option value="5m" selected>5m</option><option value="15m">15m</option><option value="1h">1h</option><option value="4h">4h</option><option value="1d">1d</option></select></div><div id="chart" class="chart"></div><div class="overlay"><span class="statpill">Regime: <b id="regime">—</b></span><span class="statpill">Trend: <b id="trend">—</b></span><span class="statpill">RV: <b id="rv">—</b></span></div></div>
+ <div class="chart-area"><div class="chart-header"><b id="viewTitle">OVERVIEW</b><span class="grow"></span><label class="sub">Timeframe</label><select id="tf" class="tab"><option value="1m">1m</option><option value="5m" selected>5m</option><option value="15m">15m</option><option value="1h">1h</option><option value="4h">4h</option><option value="1d">1d</option></select></div><div id="chart" class="chart"></div><div class="overlay"><span class="statpill">Regime: <b id="regime">—</b></span><span class="statpill">Trend: <b id="trend">—</b></span><span class="statpill">RV: <b id="rv">—</b></span></div></div>
  <div class="panel-grid">
   <article class="panel signal" data-view="OVERVIEW"><div class="sub">NET SIGNAL</div><b id="signal">—</b><div class="sub">confidence <b id="confidence">—</b></div><div class="bar"><i id="confidenceBar"></i></div></article>
   <article class="panel" data-view="OVERVIEW"><h3>Execution Levels</h3><div class="metricrow"><span>Entry</span><b id="entry">—</b></div><div class="metricrow"><span>Stop / risk</span><b id="sl">—</b></div><div class="metricrow"><span>Target</span><b id="tp">—</b></div><div class="metricrow"><span>Expected net edge</span><b id="net">—</b></div></article>
@@ -48,9 +51,7 @@
  <div class="section"><h4>Top 8 levels · live</h4><div class="book"><div class="bookcol ask"></div><div class="bookcol bid"></div></div></div>
  <div class="section"><h4>Recent trades</h4><div id="trades"></div></div>
  <div class="section"><h4>Liquidation tape</h4><div id="liqs"></div></div>
- <div class="section"><h4>Model decision</h4><div class="trace">Inputs → normalized features → regime gate → weighted alpha ensemble → cost filter → risk-aware level proposal → paper-only output.
-
-No signal is allowed to claim profitability. Missing feeds remain unavailable rather than inferred.</div></div>
+ <div class="section"><h4>Model decision</h4><div class="trace">Inputs → normalized features → regime gate → weighted alpha ensemble → cost filter → risk-aware level proposal → paper-only output.\n\nNo signal is allowed to claim profitability. Missing feeds remain unavailable rather than inferred.</div></div>
 </aside>
 </div>
 <footer class="foot"><span><i class="statusdot"></i>Public market data</span><span>Binance Spot + USD-M</span><span class="grow"></span><span>Research terminal · not financial advice</span></footer>
