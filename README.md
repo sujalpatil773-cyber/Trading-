@@ -1,42 +1,51 @@
-# FluxTrade — AI Crypto Market Studio
+# FluxTrade — BTC Tier-1 Quant Research Terminal
 
-A polished browser-based crypto charting workspace with:
+FluxTrade is a browser-first quantitative research and paper-trading terminal built around **real public Binance market data**. The current branch upgrades the original charting foundation into a multi-signal intraday research surface.
 
-- Real Binance Spot historical candles via public market-data REST.
-- Real-time Binance kline updates via WebSocket.
-- TradingView Lightweight Charts for the financial chart surface.
-- Client-side EMA, SMA, RSI, VWAP, Bollinger Bands and MACD calculations.
-- Smooth glass UI, responsive layout and animated AI panel.
-- OpenRouter-powered Chart Agent with tool calling.
-- AI tools for reading chart state, changing symbol/timeframe, adding/removing indicators and drawing price levels.
-- Local-only API key storage for testing.
+## Live data
+
+The frontend consumes Binance public REST/WebSocket feeds for:
+
+- Historical and streaming Spot candles.
+- 20-level order-book snapshots.
+- Aggregate trades.
+- USD-M funding and open interest.
+- USD-M liquidation (`forceOrder`) events.
+
+The application never fabricates a value when a feed is unavailable.
+
+## Quant engine
+
+The browser computes a practical research ensemble from live data:
+
+- Multi-scale momentum.
+- EMA trend state.
+- RSI.
+- Realized volatility.
+- Volume expansion ratio.
+- Rolling fair value and residual z-score for mean reversion.
+- 20-level order-book imbalance.
+- Microprice.
+- Spread proxy.
+- Regime classification.
+- Weighted alpha ensemble.
+- Conservative transaction-cost filter.
+- Risk-aware entry, stop and target proposal.
+
+These are **research heuristics**, not a claim of institutional profitability. The numerical weights should be calibrated and validated out-of-sample before any real-money use.
+
+## UI
+
+The terminal includes research views for Overview, Market Microstructure, Alpha Engine, Regime Engine, Stat Arb, Cross Exchange, Derivatives, Volatility, Backtest, Paper Trading and Model Lab, plus a live order-flow sidebar.
 
 ## Run
 
-Open `index.html` in a modern browser, or serve the folder with any static server.
+This is a static frontend. Open `index.html` directly or serve the repository with any static HTTP server. A backend is intentionally not required for the current public-data prototype.
 
-1. Choose a Binance Spot symbol.
-2. Choose a timeframe.
-3. The chart loads historical candles from Binance and continues from its WebSocket stream.
-4. Open **API key** and paste an OpenRouter key locally.
-5. Ask the Chart Agent to analyze or manipulate the chart.
+## Safety
 
-## Important security note
+The current deployment is **paper/research only**. It does not submit exchange orders or use private exchange account credentials. Price levels and signals are hypothetical outputs from the displayed model.
 
-The browser-side OpenRouter key is intentionally a local testing mechanism. It must **not** be used as the production security model. A public deployment should send AI requests through a backend/serverless endpoint with the secret stored in an environment variable.
+## Production roadmap
 
-## Data sources
-
-The app uses Binance public market data endpoints and `data-stream.binance.vision` for market-data WebSockets. No private Binance API key is required for the chart.
-
-## Charting
-
-The chart is powered by TradingView Lightweight Charts. Public deployments should retain the required TradingView attribution.
-
-## AI
-
-The default model parameter is `openrouter/auto`. The UI displays the model actually returned by OpenRouter for each completed response. Tool calls are executed by the browser; the model itself only requests the structured tool operation.
-
-## Scope
-
-This is the first polished foundation. It deliberately does not place live orders or connect to private exchange account data. Trade ideas are analysis only and should be treated as hypothetical scenarios, not guaranteed outcomes.
+For a production Tier-1 system, move the data and quantitative engine server-side and add exchange adapters, persistent time-series storage, Redis/event streaming, calibrated impact/slippage models, walk-forward backtesting with purged/embargoed validation, portfolio optimization, execution simulation, model monitoring, authentication and secrets management.
